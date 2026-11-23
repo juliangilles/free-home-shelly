@@ -46,7 +46,7 @@ unter Add-Ons hochladen und installieren.
 Die Shellys werden im SysAP-Webinterface in den Einstellungen des Add-Ons
 „Shelly Schaltaktoren“ eingetragen (Reiter **Einstellungen**, Bereich **Shelly-Geräte**):
 
-![Add-On-Konfiguration im SysAP mit einem eingetragenen Shelly](docs/sysap-konfiguration.png)
+![Add-On-Konfiguration im SysAP mit einem eingetragenen Shelly und der Option „Bei Nichterreichbarkeit melden“](docs/sysap-konfiguration.png)
 
 | Feld       | Bedeutung                                              | Beispiel           |
 |------------|--------------------------------------------------------|--------------------|
@@ -60,6 +60,7 @@ Beim Neustart oder Update des Add-Ons markiert free@home die Geräte kurz als ni
 
 - **⊕ (Plus unter der Liste):** fügt einen weiteren Shelly hinzu. Für jeden Shelly einen eigenen
   Eintrag mit Name und IP-Adresse anlegen; Shellys mit mehreren Relais brauchen trotzdem nur einen Eintrag.
+- **ⓘ neben einer Option:** zeigt eine kurze Erklärung zu dieser Option.
 - **Papierkorb rechts neben „Shelly-Geräte“:** entfernt diesen Eintrag.
 - **Protokoll:** zeigt die Log-Ausgaben des Add-Ons, z. B. „detected … (Gen2), 1 relay channel(s)“
   oder warum ein Shelly nicht verbunden werden konnte.
@@ -163,6 +164,7 @@ updated, free@home briefly marks the devices as unreachable.
 
 - **⊕ (plus below the list):** adds another Shelly. Create one entry per Shelly; a Shelly with
   several relays still needs only one entry.
+- **ⓘ next to an option:** shows a short explanation of that option.
 - **Trash icon next to "Shelly devices":** removes this entry.
 - **Log tab:** shows the add-on's log output, e.g. "detected … (Gen2), 1 relay channel(s)" or why
   a Shelly could not be connected.
