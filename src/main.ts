@@ -30,7 +30,7 @@ function parseConfiguration(configuration: AddOn.Configuration): ShellyConfig[] 
       console.warn(`Ignoring Shelly entry "${name}": invalid IP "${ip}"`);
       continue;
     }
-    result.push({ nativeId: `shellypro1pm-${entryId}`, name, ip });
+    result.push({ nativeId: `shelly-${entryId}`, name, ip });
   }
   return result;
 }
@@ -56,12 +56,7 @@ async function applyConfiguration(configs: ShellyConfig[]): Promise<void> {
     console.log(`Starting ${config.name} (${config.ip})`);
     const bridge = new ShellyBridge(freeAtHome, config);
     bridges.set(config.nativeId, bridge);
-    try {
-      await bridge.start();
-    } catch (error) {
-      console.error(`Failed to start ${config.name}:`, error);
-      bridges.delete(config.nativeId);
-    }
+    bridge.start();
   }
 }
 
