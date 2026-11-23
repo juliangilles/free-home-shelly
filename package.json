@@ -1,0 +1,26 @@
+{
+  "name": "free-at-home-shelly-pro-1pm",
+  "version": "1.0.0",
+  "description": "free@home Add-On zur Steuerung von Shelly Pro 1PM Schaltaktoren",
+  "main": "build/main.js",
+  "private": true,
+  "scripts": {
+    "build": "tsc",
+    "start": "node build/main.js",
+    "pack": "npm run build && free-at-home-cli buildscriptarchive build",
+    "validate": "free-at-home-cli validate",
+    "test:shelly": "npm run build && node build/tools/shelly-test.js"
+  },
+  "dependencies": {
+    "@busch-jaeger/free-at-home": "^0.37.0",
+    "ws": "^8.23.0"
+  },
+  "devDependencies": {
+    "@busch-jaeger/free-at-home-cli": "^0.13.1",
+    "@types/node": "^20.19.43",
+    "@types/ws": "^8.18.2",
+    "typescript": "^7.0.2"
+  },
+  "license": "MIT",
+  "author": "Julian Gilles"
+}

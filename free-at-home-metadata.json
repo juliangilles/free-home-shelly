@@ -1,0 +1,41 @@
+{
+  "version": "1.0.0",
+  "id": "de.julian-gilles.shelly-pro-1pm",
+  "name": {
+    "en": "Shelly Pro 1PM",
+    "de": "Shelly Pro 1PM"
+  },
+  "description": {
+    "en": "Control Shelly Pro 1PM relays as free@home switch actuators.",
+    "de": "Steuert Shelly Pro 1PM Relais als free@home Schaltaktoren."
+  },
+  "license": "MIT",
+  "author": "Julian Gilles",
+  "url": "https://shelly-api-docs.shelly.cloud/gen2/Devices/Gen2/ShellyPro1PM",
+  "entryPoint": "build/main.js",
+  "type": "app",
+  "accessControl": {
+    "networkAccess": true
+  },
+  "parameters": {
+    "shellys": {
+      "name": "Shelly devices",
+      "name@de": "Shelly-Geräte",
+      "multiple": true,
+      "items": {
+        "name": {
+          "name": "Name",
+          "name@de": "Name",
+          "type": "string",
+          "required": true
+        },
+        "ip": {
+          "name": "IP address",
+          "name@de": "IP-Adresse",
+          "type": "ipv4",
+          "required": true
+        }
+      }
+    }
+  }
+}
