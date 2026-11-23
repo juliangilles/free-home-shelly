@@ -38,7 +38,7 @@ npm install
 npm run pack
 ```
 
-Ergebnis: `de.julian-gilles.shelly-switch-2.0.0.tar` – diese Datei im SysAP-Webinterface
+Ergebnis: `de.julian-gilles.shelly-switch-2.1.0.tar` – diese Datei im SysAP-Webinterface
 unter Add-Ons hochladen und installieren.
 
 ## Konfiguration
@@ -52,6 +52,11 @@ Die Shellys werden im SysAP-Webinterface in den Einstellungen des Add-Ons
 |------------|--------------------------------------------------------|--------------------|
 | Name       | Name des Schaltaktors in free@home                     | Steckdose - Carport |
 | IP-Adresse | Feste IP-Adresse des Shelly im lokalen Netz            | 192.168.40.41      |
+| Bei Nichterreichbarkeit melden | Ist der Shelly nicht erreichbar, zeigt free@home „Gerät nicht erreichbar“. Ausschalten, um diese Meldung zu unterdrücken (z. B. bei Steckdosen, die oft ausgesteckt sind). Standard: an | an |
+
+Bei ausgeschalteter Meldung bleibt der Schaltaktor in free@home scheinbar erreichbar; Schaltbefehle an
+einen nicht erreichbaren Shelly gehen dann ins Leere und der alte Zustand wird zurückgemeldet.
+Beim Neustart oder Update des Add-Ons markiert free@home die Geräte kurz als nicht erreichbar.
 
 - **⊕ (Plus unter der Liste):** fügt einen weiteren Shelly hinzu. Für jeden Shelly einen eigenen
   Eintrag mit Name und IP-Adresse anlegen; Shellys mit mehreren Relais brauchen trotzdem nur einen Eintrag.
@@ -137,7 +142,7 @@ npm install
 npm run pack
 ```
 
-This creates `de.julian-gilles.shelly-switch-2.0.0.tar`. Upload and install it in the SysAP
+This creates `de.julian-gilles.shelly-switch-2.1.0.tar`. Upload and install it in the SysAP
 web interface under add-ons.
 
 ### Configuration
@@ -150,6 +155,11 @@ taken from a German SysAP).
 |------------|------------------------------------------------|--------------------|
 | Name       | Name of the switch actuator in free@home       | Garden pump        |
 | IP address | Fixed IP address of the Shelly on your network | 192.168.1.50       |
+| Report when unreachable | If the Shelly cannot be reached, free@home shows "device not reachable". Turn off to suppress this message (e.g. for plugs that are often unplugged). Default: on | on |
+
+With reporting turned off, the actuator stays "reachable" in free@home; commands to an unreachable
+Shelly have no effect and the previous state is reported back. While the add-on restarts or is
+updated, free@home briefly marks the devices as unreachable.
 
 - **⊕ (plus below the list):** adds another Shelly. Create one entry per Shelly; a Shelly with
   several relays still needs only one entry.

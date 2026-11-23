@@ -1,5 +1,5 @@
 {
-  "version": "2.0.0",
+  "version": "2.1.0",
   "id": "de.julian-gilles.shelly-switch",
   "name": {
     "en": "Shelly Switch Actuators",
@@ -34,6 +34,14 @@
           "name@de": "IP-Adresse",
           "type": "ipv4",
           "required": true
+        },
+        "reportUnreachable": {
+          "name": "Report when unreachable",
+          "name@de": "Bei Nichterreichbarkeit melden",
+          "description": "Mark the device as unreachable in free@home when the Shelly cannot be reached. Disable to suppress the 'device not reachable' messages, e.g. for plugs that are often unplugged.",
+          "description@de": "Gerät in free@home als nicht erreichbar markieren, wenn der Shelly nicht antwortet. Deaktivieren, um die Meldung „Gerät nicht erreichbar“ zu unterdrücken, z. B. bei Steckdosen, die oft ausgesteckt sind.",
+          "type": "boolean",
+          "default": true
         }
       }
     }

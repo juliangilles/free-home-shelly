@@ -8,6 +8,8 @@ export interface ShellyConfig {
   nativeId: string;
   name: string;
   ip: string;
+  /** false: Gerät in free@home nie als "nicht erreichbar" markieren (keine Meldung). */
+  reportUnreachable: boolean;
 }
 
 const DETECT_RETRY_MIN_MS = 10_000;
@@ -76,7 +78,14 @@ export class ShellyBridge {
       const channel = await this.freeAtHome.createSwitchingActuatorDevice(`${this.config.nativeId}-${ch}`, name);
       // Zustand erst bestätigen, wenn der Shelly wirklich geschaltet hat.
       channel.setAutoConfirm(false);
-      await channel.setUnresponsive().catch(() => undefined);
+      if (this.config.reportUnreachable) {
+        // Bis der Shelly antwortet, als "nicht erreichbar" markieren.
+        await channel.setUnresponsive().catch(() => undefined);
+      } else {
+        // Immer als erreichbar führen, damit free@home keine Meldung erzeugt.
+        channel.setAutoKeepAlive(true);
+        await channel.triggerKeepAlive().catch(() => undefined);
+      }
       this.actuators.set(ch, { channel });
 
       channel.on('isOnChanged', (on: boolean) => void this.switch(ch, on));
@@ -95,6 +104,10 @@ export class ShellyBridge {
     });
 
     shelly.on('offline', () => {
+      if (!this.config.reportUnreachable) {
+        console.log(`${this.log} unreachable (not reported to free@home)`);
+        return;
+      }
       for (const { channel } of this.actuators.values()) {
         channel.setAutoKeepAlive(false);
         channel.setUnresponsive().catch((e) => console.error(`${this.log} setUnresponsive failed`, e));

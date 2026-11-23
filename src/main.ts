@@ -30,7 +30,9 @@ function parseConfiguration(configuration: AddOn.Configuration): ShellyConfig[] 
       console.warn(`Ignoring Shelly entry "${name}": invalid IP "${ip}"`);
       continue;
     }
-    result.push({ nativeId: `shelly-${entryId}`, name, ip });
+    // Standard: melden. Nur ein explizites "aus" unterdrückt die Meldung.
+    const reportUnreachable = !(items.reportUnreachable === false || items.reportUnreachable === 'false');
+    result.push({ nativeId: `shelly-${entryId}`, name, ip, reportUnreachable });
   }
   return result;
 }
@@ -43,7 +45,12 @@ async function applyConfiguration(configs: ShellyConfig[]): Promise<void> {
   // Entfernte oder geänderte Geräte stoppen
   for (const [id, bridge] of bridges) {
     const next = wanted.get(id);
-    if (!next || next.ip !== bridge.config.ip || next.name !== bridge.config.name) {
+    if (
+      !next ||
+      next.ip !== bridge.config.ip ||
+      next.name !== bridge.config.name ||
+      next.reportUnreachable !== bridge.config.reportUnreachable
+    ) {
       console.log(`Stopping ${bridge.config.name} (${bridge.config.ip})`);
       await bridge.stop();
       bridges.delete(id);
